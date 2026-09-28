@@ -15,8 +15,8 @@ A PyTorch image classifier that uses a convolutional neural network to identify 
 
 ## Requirements
 
-- Python 3.10
-- `torch`, `torchvision`, `timm`, `numpy`, `matplotlib`, `tqdm`
+- Python 3.14
+- `torch`, `torchvision`, `timm`, `numpy`, `matplotlib`, `pillow`, `tqdm` (pinned versions in `requirements.txt`, install with `pip install -r requirements.txt`)
 
 ## Dataset setup
 
