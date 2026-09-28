@@ -12,6 +12,7 @@ venv/
 *.pt
 *.pth
 
+#environment variables
 .env
 venv/
 
