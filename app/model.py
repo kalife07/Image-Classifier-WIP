@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt #for visualization
 import pandas as pd
 import numpy as np
 import sys
-from tqdm.notebook import tqdm
+from tqdm import tqdm
 
 from dataset import PlayingCardDataset
 
@@ -19,7 +19,7 @@ transform = transforms.Compose([
 ])
 
 train_folder = 'dataset/train'
-validation_folder = 'dataset/validation'
+validation_folder = 'dataset/valid'
 test_folder = 'dataset/test'
 
 train_dataset = PlayingCardDataset(train_folder, transform=transform)
@@ -53,15 +53,19 @@ class SimpleCardClassifier(nn.Module):
         return output
 
 
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+if torch.cuda.is_available():
+    device = torch.device("cuda")
+elif torch.backends.mps.is_available():
+    device = torch.device("mps")
+else:
+    device = torch.device("cpu")
+    
 print(f'Using device: {device}')
 
 model = SimpleCardClassifier(num_classes=len(dataset.classes)).to(device)
 
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.parameters(), lr=0.001)
-
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 num_epochs = 5
 train_losses, val_losses = [], []
